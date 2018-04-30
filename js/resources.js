@@ -6,7 +6,7 @@
  */
 (function() {
     var resourceCache = {};
-    var loading = [];
+    //var loading = [];
     var readyCallbacks = [];
 
     /* This is the publicly accessible image loading function. It accepts
@@ -57,6 +57,10 @@
                  * call all of the onReady() callbacks we have defined.
                  */
                 if(isReady()) {
+
+                    // for (ssany_index in readyCallbacks.length) {
+                    //     readyCallbacks[ssany_index]();
+                    // }
                     readyCallbacks.forEach(function(func) { func(); });
                 }
             };
@@ -84,8 +88,7 @@
     function isReady() {
         var ready = true;
         for(var k in resourceCache) {
-            if(resourceCache.hasOwnProperty(k) &&
-               !resourceCache[k]) {
+            if(resourceCache.hasOwnProperty(k) && !resourceCache[k]) {
                 ready = false;
             }
         }
@@ -108,4 +111,5 @@
         onReady: onReady,
         isReady: isReady
     };
+    //window.Resources.load('http://stipaxa.ie/kartinka1.png');
 })();
