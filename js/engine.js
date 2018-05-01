@@ -81,7 +81,30 @@ let Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    function checkCollisions() {
+        let playerRect = player.getCollisionRect();
+        allEnemies.forEach(function(enemy) {
+            let enemyRect = enemy.getCollisionRect();
+            if(checkRectCollision(playerRect, enemyRect)) {
+                console.log("collision");
+                player.x = 200;
+                player.y = canvasHeight - 313;
+            }
+        });
+    }
+
+    function checkRectCollision(rect1, rect2) {
+        let right = rect1.x > rect2.x + rect2.width;
+        let left = rect1.x + rect1.width < rect2.x;
+        let bottom = rect1.y > rect2.y + rect2.height;
+        let top = rect1.y + rect1.height < rect2.y;
+        if(right || left || top || bottom) {
+            return false;
+        }
+        return true;
     }
 
     /* This is called by the update function and loops through all of the

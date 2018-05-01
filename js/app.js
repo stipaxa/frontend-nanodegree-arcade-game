@@ -15,6 +15,7 @@ let Enemy = function() {
 function getRandomY() {
     const arrY = [60, 145, 230];
     let i = Math.floor(Math.random() * 3);
+    console.log(i);
     return arrY[i];
 }
 
@@ -32,18 +33,34 @@ Enemy.prototype.update = function(dt) {
     this.x += dt * this.speed;
     if (this.x > canvasWidth) {
         this.x = -Resources.get(this.sprite).width;
+        this.y = getRandomY(); 
+        this.speed = getRandomSpeed();
     }
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // let cr = this.getCollisionRect();
+    // ctx.globalAlpha = .6;
+    // ctx.fillRect(cr.x, cr.y, cr.width, cr.height);
+    // ctx.globalAlpha = 1;
+};
+
+Enemy.prototype.getCollisionRect = function() {
+    let image = Resources.get(this.sprite);
+    return {
+        x: this.x,
+        y: this.y + 73,
+        width: image.width,
+        height: image.height - 100
+    }
 };
 
 let Player = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 200;
-    this.y = canvasHeight - 230;
+    this.y = canvasHeight - 313;
     this.dx = 0;
     this.dy = 0;
 }
@@ -82,6 +99,20 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // let cr = this.getCollisionRect();
+    // ctx.globalAlpha = .6;
+    // ctx.fillRect(cr.x, cr.y, cr.width, cr.height);
+    // ctx.globalAlpha = 1;
+};
+
+Player.prototype.getCollisionRect = function() {
+    let image = Resources.get(this.sprite);
+    return {
+        x: this.x,
+        y: this.y + 91,
+        width: image.width,
+        height: image.height - 93
+    }
 };
 
 // Now write your own player class
