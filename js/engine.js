@@ -28,10 +28,11 @@ let Engine = (function(global) {
     let allEnemies = [];
     // instance for player
     let player;
-    // close modal window (end of the game)
+    // modal window (end of the game)
     let modal_game_results = $("#modal_game_results");
     // modal window (pause of the game)
     let modal_pause = $("#modal_pause");
+    let modal_player_character = $("modal_player_character");
     let isGamePaused = false;
 
     canvas.width = 505;
@@ -87,6 +88,7 @@ let Engine = (function(global) {
      * game loop.
      */
     function init() {
+        showModalWindowPlayersCharacters();
         allEnemies = [new Enemy(), new Enemy(), new Enemy()];
         console.log(allEnemies);
         player = new Player();
@@ -262,6 +264,15 @@ let Engine = (function(global) {
             lastTime = Date.now();
             isGamePaused = false;
             main();
+        });
+    }
+
+    function showModalWindowPlayersCharacters() {
+        console.log("Player Character");
+        modal_player_character.css("display", "block");
+        $("#player_character_close").off();
+        $("#player_character_close").on("click", function(event) {
+            modal_player_character.css("display", "none");
         });
     }
 

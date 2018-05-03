@@ -78,6 +78,8 @@ body {
     margin: -40px 0;
 }
 
+/* Modal windos */
+
 .modal {
     display: none;
     position: fixed;
@@ -122,7 +124,8 @@ body {
 }
 
 #end_game_close,
-#pause_close {
+#pause_close,
+#player_character_close {
     color: #000;
     float: right;
     font-size: 30px;
@@ -132,7 +135,9 @@ body {
 #end_game_close:hover,
 #end_game_close:focus,
 #pause_close:hover,
-#pause_close:focus {
+#pause_close:focus,
+#player_character_close:hover,
+#player_character_close:focus {
     color: #0771ea;
     text-decoration: none;
     cursor: pointer;
@@ -142,16 +147,18 @@ body {
     padding-left: 15px;
 }
 
+
+/* Grid layout */
 .container {
     display: grid;
     width: 100%;
     grid-gap: 5px;
-    grid-template-columns: 120px 1fr 200px 100px;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: 70px 1fr 30px;
     grid-template-areas: 
-    ". header nav nav"
-    "sidebar main main sidebar2"
-    "footer footer footer footer";
+    "header header header"
+    "sidebar main sidebar2"
+    "footer footer footer";
 }
 
 .box {
@@ -169,10 +176,21 @@ body {
     justify-content: center;
 }
 
+
+.title {
+    display: inline-block;
+    margin-right: 70px;
+}
+
+.nav {
+    display: inline-block;
+    margin-left: 70px;
+}
+
 /*
 * Nav
 */
-.nav {
+/* .nav {
     grid-area: nav;
     display: grid;
     grid-gap: 5px;
@@ -180,7 +198,7 @@ body {
     grid-template-areas: "start_control pause_control";
     justify-content: center;
     align-self: center;
-}
+} */
 
 /*
 * Sidebars
