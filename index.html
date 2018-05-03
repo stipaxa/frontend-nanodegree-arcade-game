@@ -3,9 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Arcade Game: Frogger</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'> -->
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="container">
+        <!-- header grid -->
+        <div class="header">
+            <h1 id="title_page">Arcade game</h1>
+        </div>
+        <!-- nav grid -->
+        <div class="nav">
+            <div id="start_control" class="game_controls tooltip">
+                <span class="tooltiptext">New game</span>
+            </div>
+            <div id="pause_control" class="game_controls tooltip">
+                <span class="tooltiptext">Pause</span>
+            </div>
+            <!-- Modal window for pause (default: hidden)-->
+            <div id="modal_pause" class="modal">
+                <!-- Modal content -->
+                <div class="modal_c">
+                    <span id="pause_close">&times;</span>
+                    <h2 id="pause">PAUSE</h2>
+                </div>
+            </div>          
+        </div>
+        <!-- sidebar grid -->
+        <div class="sidebar"></div>
+        <!-- sidebar2 grid -->
+        <div class="sidebar2"></div>
+        <!-- main grid -->
+        <div class="main">
+            <!-- Modal window for final details (default: hidden)-->
+            <div id="modal_game_results" class="modal">
+                <!-- Modal content -->
+                <div class="modal_c">
+                    <span id="end_game_close">&times;</span>
+                    <h2 id="game_results_title">You are win!</h2>
+                    <div id="modal_new_game_control" class="center_div">New Game</div>
+                </div>
+            </div>
+        </div>
+        <!-- footer grid -->
+        <div class="footer">
+            Taisia Simakova 2018
+        </div>
+    </div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>

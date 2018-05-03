@@ -18,17 +18,29 @@ let Engine = (function(global) {
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
-    let doc = global.document,
-        win = global.window,
-        canvas = doc.createElement('canvas'),
-        ctx = canvas.getContext('2d'),
-        lastTime,
-        allEnemies = [],
-        player;
+    let doc = global.document;
+    let win = global.window;
+    let bg = doc.createElement('div');
+    let canvas = doc.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    let lastTime;
+    // instance-array for enemies
+    let allEnemies = [];
+    // instance for player
+    let player;
+    // close modal window (end of the game)
+    let modal_game_results = $("#modal_game_results");
+    // modal window (pause of the game)
+    let modal_pause = $("#modal_pause");
+    let isGamePaused = false;
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    canvas.id = 'canvas';
+    bg.id = 'board_grid';
+    doc.getElementsByClassName('main')[0].appendChild(bg);
+    bg.appendChild(canvas);
+    
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -54,6 +66,16 @@ let Engine = (function(global) {
          */
         lastTime = now;
 
+        if(player.y < 0) {
+            showModalWindowEndOfGame();
+            return;
+        }
+
+        if(isGamePaused) {
+            showModalWindowPause();
+            return;
+        }
+
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
@@ -65,7 +87,12 @@ let Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+        console.log(allEnemies);
+        player = new Player();
+        global.player = player;
+        ctx = canvas.getContext('2d');
+        // reset();
         lastTime = Date.now();
         main();
     }
@@ -181,15 +208,61 @@ let Engine = (function(global) {
         player.render();
     }
 
+    /**
+    * @description New game by click the link on modal window
+    */
+    $("#modal_new_game_control").on("click", function(event) {
+        $("#modal_game_results").css("display", "none");
+        init();
+    });
+
+    /**
+    * @description New game by click the icon 
+    */
+    $("#start_control").on("click", function(event) {
+        init();
+    });
+
+    /**
+    * @description New game by click the icon 
+    */
+    $("#start_control").on("click", function(event) {
+        init();
+    });
+
+    $("#pause_control").on("click", function(event) {
+        // canvas.pause();
+        console.log("pause");
+        // showModalWindowPause();
+        isGamePaused = true;
+    });
+
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
         // noop
-        allEnemies = [new Enemy(), new Enemy(), new Enemy()];
-        player = new Player();
-        global.player = player;
+    }
+
+    function showModalWindowEndOfGame() {
+        modal_game_results.css("display", "block");
+        $("#end_game_close").off();
+        $("#end_game_close").on("click", function(event) {
+            modal_game_results.css("display", "none");
+        });
+    }
+
+    function showModalWindowPause() {
+        // pause Off (modal window disappear)
+        modal_pause.css("display", "block");
+        $("#pause_close").off();
+        $("#pause_close").on("click", function(event) {
+            modal_pause.css("display", "none");
+            lastTime = Date.now();
+            isGamePaused = false;
+            main();
+        });
     }
 
     /* Go ahead and load all of the images we know we're going to need to
