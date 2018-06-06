@@ -1,11 +1,5 @@
 body {
     text-align: center;
-    /* font-family: 'EB Garamond'; */
-    /* font-family: 'Dosis', sans-serif; */
-    /* font-family: 'Bitter', serif; */
-
-    /* font-family: 'Pacifico', cursive; */
-    /* font-family: 'Comfortaa', cursive; */
     font-family: 'Berkshire Swash', cursive; 
 
     font-size: 22px;
@@ -14,9 +8,7 @@ body {
 }
 
 #title_page {
-    /* background-color: coral; */
     color: #1c1c7a;
-    /* font-size: 60px; */
     text-align: center;
     margin-top: 10px;
     margin-bottom: 0;
@@ -186,19 +178,6 @@ body {
     display: inline-block;
     margin-left: 70px;
 }
-
-/*
-* Nav
-*/
-/* .nav {
-    grid-area: nav;
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 50px 50px;
-    grid-template-areas: "start_control pause_control";
-    justify-content: center;
-    align-self: center;
-} */
 
 /*
 * Sidebars

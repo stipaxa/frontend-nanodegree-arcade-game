@@ -1,4 +1,6 @@
-// Enemies our player must avoid
+/**
+ * Enemies our player must avoid.
+ */ 
 let Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -11,21 +13,27 @@ let Enemy = function() {
     this.speed = getRandomSpeed(); // speed
 };
 
-// generate a initial random Y enemie's coodrinate
+/**
+ * @return Random row coodrinate. 
+ */
 function getRandomY() {
     const arrY = [60, 145, 230];
     let i = Math.floor(Math.random() * 3);
-    console.log(i);
     return arrY[i];
 }
 
-// generate random enemie's speed
+/** 
+ * @return Random enemie's speed in pixels/s.
+ */
 function getRandomSpeed() {
     return Math.floor((Math.random() * 150) + 50);
 }
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+/**
+ * Update the enemy's position, required method for game.
+ * 
+ * @param dt [in] time in seconds elapsed since last frame.
+ */
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
@@ -38,15 +46,19 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draw the enemy on the screen, required method for game
+/**
+ * Draw the enemy on the screen, required method for game.
+ */
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    // let cr = this.getCollisionRect();
-    // ctx.globalAlpha = .6;
-    // ctx.fillRect(cr.x, cr.y, cr.width, cr.height);
-    // ctx.globalAlpha = 1;
 };
 
+/**
+ * Calculate enemies collision rect.
+ * Crops the actual enemy size from the image.
+ * 
+ * @return Collision rect as dictionary.
+ */
 Enemy.prototype.getCollisionRect = function() {
     let image = Resources.get(this.sprite);
     return {
@@ -57,6 +69,10 @@ Enemy.prototype.getCollisionRect = function() {
     }
 };
 
+/**
+ * Our player who avoids the enemies and tries to reach 
+ * the wather line.
+ */
 let Player = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 200;
@@ -65,6 +81,12 @@ let Player = function() {
     this.dy = 0;
 }
 
+/**
+ * Converts user input to the players movement.
+ * 
+ * @param {String} keyCode one of left/up/right/down depending on 
+ * the user input. 
+ */
 Player.prototype.handleInput = function(keyCode) {
     if (keyCode === 'left') {
         this.dx = -100;
@@ -77,6 +99,10 @@ Player.prototype.handleInput = function(keyCode) {
     }
 }
 
+/**
+ * Updates players position.
+ * Called every frame before render. 
+ */
 Player.prototype.update = function() {
     if (this.y < -5 && this.dy < 0) {
         this.dy = 0;
@@ -97,14 +123,20 @@ Player.prototype.update = function() {
     this.dy = 0;
 }
 
+/**
+ * Draws player.
+ * Called every frame.
+ */
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    // let cr = this.getCollisionRect();
-    // ctx.globalAlpha = .6;
-    // ctx.fillRect(cr.x, cr.y, cr.width, cr.height);
-    // ctx.globalAlpha = 1;
 };
 
+/**
+ * Calculate players collision rect.
+ * Crops the actual players size from the image.
+ * 
+ * @return Collision rect as dictionary.
+ */
 Player.prototype.getCollisionRect = function() {
     let image = Resources.get(this.sprite);
     return {
@@ -115,21 +147,11 @@ Player.prototype.getCollisionRect = function() {
     }
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-    // let allEnemies = [new Enemy(), new Enemy(), new Enemy()];
-    // let player = new Player();
-
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+/** 
+ * This listens for key presses and sends the keys to your
+ * Player.handleInput() method. You don't need to modify this.
+ */
+ document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
