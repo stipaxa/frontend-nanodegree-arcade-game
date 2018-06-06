@@ -5,14 +5,14 @@ Students should use this [rubric](https://review.udacity.com/#!/projects/2696458
 
 For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
 
-how to start
-============
+How to start
+------------
 Check out the project. 
 ```bash
   git clone https://github.com/stipaxa/udacity_nanodegree_arcade_game.git
 ```
 Open index.html in Google Chrome.
 
-controls
-========
+Controls
+--------
 Press left/up/right/down arrow keys in order to move the player. Reach water level, avoid the enemies.
