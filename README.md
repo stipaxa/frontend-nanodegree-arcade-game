@@ -9,7 +9,7 @@ how to start
 ============
 Check out the project. 
 ```bash
-  git clone ...
+  git clone https://github.com/stipaxa/udacity_nanodegree_arcade_game.git
 ```
 Open index.html in Google Chrome.
 
