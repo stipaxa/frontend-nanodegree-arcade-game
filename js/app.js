@@ -1,7 +1,7 @@
 /**
  * Enemies our player must avoid.
  */ 
-let Enemy = function() {
+const Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -9,23 +9,23 @@ let Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -Resources.get(this.sprite).width;
-    this.y = getRandomY(); // y coordinate
-    this.speed = getRandomSpeed(); // speed
+    this.y = this.getRandomY(); // y coordinate
+    this.speed = this.getRandomSpeed(); // speed
 };
 
 /**
  * @return Random row coodrinate. 
  */
-function getRandomY() {
+Enemy.prototype.getRandomY = function() {
     const arrY = [60, 145, 230];
-    let i = Math.floor(Math.random() * 3);
+    const i = Math.floor(Math.random() * 3);
     return arrY[i];
 }
 
 /** 
  * @return Random enemie's speed in pixels/s.
  */
-function getRandomSpeed() {
+Enemy.prototype.getRandomSpeed = function() {
     return Math.floor((Math.random() * 150) + 50);
 }
 
@@ -41,8 +41,8 @@ Enemy.prototype.update = function(dt) {
     this.x += dt * this.speed;
     if (this.x > canvasWidth) {
         this.x = -Resources.get(this.sprite).width;
-        this.y = getRandomY(); 
-        this.speed = getRandomSpeed();
+        this.y = this.getRandomY(); 
+        this.speed = this.getRandomSpeed();
     }
 };
 
@@ -60,7 +60,7 @@ Enemy.prototype.render = function() {
  * @return Collision rect as dictionary.
  */
 Enemy.prototype.getCollisionRect = function() {
-    let image = Resources.get(this.sprite);
+    const image = Resources.get(this.sprite);
     return {
         x: this.x,
         y: this.y + 73,
@@ -73,7 +73,7 @@ Enemy.prototype.getCollisionRect = function() {
  * Our player who avoids the enemies and tries to reach 
  * the wather line.
  */
-let Player = function() {
+const Player = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 200;
     this.y = canvasHeight - 313;
@@ -138,11 +138,12 @@ Player.prototype.render = function() {
  * @return Collision rect as dictionary.
  */
 Player.prototype.getCollisionRect = function() {
-    let image = Resources.get(this.sprite);
+    const image = Resources.get(this.sprite);
+    const shrink_x = 25;
     return {
-        x: this.x,
+        x: this.x + shrink_x,
         y: this.y + 91,
-        width: image.width,
+        width: image.width - 2*shrink_x,
         height: image.height - 93
     }
 };
